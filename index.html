@@ -10300,9 +10300,25 @@ Elm.Character.make = function (_elm) {
        $Result = Elm.Result.make(_elm),
        $Signal = Elm.Signal.make(_elm);
        var _op = {};
-       var princess = {name: "Peach",favoriteColor: "Pink"};
        var Character = F2(function (a,b) { return {name: a,favoriteColor: b};});
-       return _elm.Character.values = {_op: _op,Character: Character,princess: princess};
+       var princess = A2(Character,"Princess Peach","Pink");
+       var mario = A2(Character,"Mario","Red");
+       var luigi = A2(Character,"Luigi","Green");
+       var boo = A2(Character,"Boo","White");
+       var bigBoo = A2(Character,"Big Boo","Snow White");
+       var mechaKoopa = A2(Character,"MechaKoopa","Metallic Green");
+       var goomba = A2(Character,"Goomba","Brown");
+       var bill = A2(Character,"Bullet Bill","Black");
+       return _elm.Character.values = {_op: _op
+                                      ,Character: Character
+                                      ,princess: princess
+                                      ,mario: mario
+                                      ,luigi: luigi
+                                      ,boo: boo
+                                      ,bigBoo: bigBoo
+                                      ,mechaKoopa: mechaKoopa
+                                      ,goomba: goomba
+                                      ,bill: bill};
     };Elm.Castle = Elm.Castle || {};
 Elm.Castle.make = function (_elm) {
        "use strict";
@@ -10319,7 +10335,9 @@ Elm.Castle.make = function (_elm) {
        $Result = Elm.Result.make(_elm),
        $Signal = Elm.Signal.make(_elm);
        var _op = {};
-       var cellStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "padding",_1: "5px"},{ctor: "_Tuple2",_0: "text-align",_1: "left"}]));
+       var cellStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "padding",_1: "5px"}
+                                                      ,{ctor: "_Tuple2",_0: "text-align",_1: "left"}
+                                                      ,{ctor: "_Tuple2",_0: "width",_1: "50%"}]));
        var tableRow = F2(function (a,b) {
                          var cell = function (s) { return A2($Html.td,_U.list([cellStyle]),_U.list([$Html.text(s)]));};
                          return A2($Html.tr,_U.list([]),_U.list([cell(a),cell(b)]));
@@ -10327,12 +10345,16 @@ Elm.Castle.make = function (_elm) {
        var characterView = function ($char) { return A2(tableRow,$char.name,$char.favoriteColor);};
        var view = function (castle) {
           return A2($Html.div
-                   ,_U.list([cellStyle])
+                   ,_U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "padding",_1: "10px"}
+                                                            ,{ctor: "_Tuple2",_0: "margin",_1: "10px"}
+                                                            ,{ctor: "_Tuple2",_0: "border",_1: "1px solid #666"}
+                                                            ,{ctor: "_Tuple2",_0: "width",_1: "300px"}
+                                                            ,{ctor: "_Tuple2",_0: "float",_1: "left"}]))])
                    ,_U.list([A2($Html.h1,_U.list([]),_U.list([$Html.text(castle.name)]))
-                            ,A2($Html.img,_U.list([$Html$Attributes.src("http://www.mariowiki.com/images/c/ce/SMBDX_World_8.PNG")]),_U.list([]))
-                            ,A2($Html.h2,_U.list([]),_U.list([$Html.text("Characters")]))
+                            ,A2($Html.img,_U.list([$Html$Attributes.src(castle.image)]),_U.list([]))
+                            ,A2($Html.h2,_U.list([]),_U.list([$Html.text(A2($Basics._op["++"],"Characters in ",castle.name))]))
                             ,A2($Html.table
-                               ,_U.list([])
+                               ,_U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}]))])
                                ,A2($Basics._op["++"]
                                   ,_U.list([A2($Html.tr
                                               ,_U.list([])
@@ -10342,19 +10364,40 @@ Elm.Castle.make = function (_elm) {
        };
        var hasCharacter = function (character) { return function (_p0) { return A2($List.member,character,function (_) { return _.characters;}(_p0));};};
        var bowsersCastle = {name: "Bowser\'s Castle"
-                           ,characters: _U.list([{name: "Bowser",favoriteColor: "Black"}
-                                                ,{name: "Boo",favoriteColor: "White"}
-                                                ,{name: "Big Boo",favoriteColor: "Snow White"}
-                                                ,{name: "MechaKoopa",favoriteColor: "Green"}
+                           ,image: "http://www.mariowiki.com/images/c/ce/SMBDX_World_8.PNG"
+                           ,characters: _U.list([A2($Character.Character,"Bowser","Black")
+                                                ,$Character.boo
+                                                ,$Character.bigBoo
+                                                ,$Character.mechaKoopa
                                                 ,$Character.princess])};
-       var lakitusCastle = {name: "",characters: _U.list([])};
-       var koopaTroopasCastle = {name: "",characters: _U.list([])};
-       var goombasCastle = {name: "",characters: _U.list([])};
-       var allCastles = _U.list([goombasCastle,koopaTroopasCastle,lakitusCastle,bowsersCastle]);
-       var Castle = F2(function (a,b) { return {name: a,characters: b};});
+       var lakitusCastle = {name: "Lakitu\'s Castle"
+                           ,image: "http://www.mariowiki.com/images/c/ce/SMBDX_World_2.PNG"
+                           ,characters: _U.list([A2($Character.Character,"Lakitu","Cloudy Gray")
+                                                ,$Character.goomba
+                                                ,A2($Character.Character,"Spiny","Orange")
+                                                ,A2($Character.Character,"Spiny Egg","-")
+                                                ,$Character.bill
+                                                ,$Character.luigi])};
+       var koopaTroopasCastle = {name: "Koopa Troopa\'s Castle"
+                                ,image: "http://www.mariowiki.com/images/c/ce/SMBDX_World_5.PNG"
+                                ,characters: _U.list([$Character.boo
+                                                     ,$Character.bigBoo
+                                                     ,$Character.mechaKoopa
+                                                     ,$Character.goomba
+                                                     ,$Character.mario
+                                                     ,A2($Character.Character,"Koopa Troopa","Yellow")])};
+       var wendysCastle = {name: "Wendy\'s Castle"
+                          ,image: "http://www.mariowiki.com/images/c/ce/SMBDX_World_4.PNG"
+                          ,characters: _U.list([$Character.goomba
+                                               ,$Character.bill
+                                               ,$Character.mechaKoopa
+                                               ,A2($Character.Character,"Spiny","Orange")
+                                               ,A2($Character.Character,"Wendy O. Koopa","Rose")])};
+       var allCastles = _U.list([wendysCastle,koopaTroopasCastle,lakitusCastle,bowsersCastle]);
+       var Castle = F3(function (a,b,c) { return {name: a,image: b,characters: c};});
        return _elm.Castle.values = {_op: _op
                                    ,Castle: Castle
-                                   ,goombasCastle: goombasCastle
+                                   ,wendysCastle: wendysCastle
                                    ,koopaTroopasCastle: koopaTroopasCastle
                                    ,lakitusCastle: lakitusCastle
                                    ,bowsersCastle: bowsersCastle
