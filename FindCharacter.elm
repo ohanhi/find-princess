@@ -47,7 +47,13 @@ view : Signal.Address Action -> Model -> Html
 view address model =
   let
     inputField =
-      input [ onInput address, inputStyles, placeholder "Search" ] []
+      input
+        [ onInput address
+        , inputStyles
+        , placeholder "Search"
+        , value model.search
+        ]
+        []
 
     castles =
       model.castles
